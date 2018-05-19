@@ -31,8 +31,10 @@ if __name__ == "__main__":
 
     return_value1 = atoi('123456')
     return_value2 = atoi('x12345')
-    return_value3 = atoi('-12345')
+    return_value3 = atoi('1xx345')
+    return_value4 = atoi('-12345')
 
     print("value1 = ", return_value1)
     print("value2 = ", return_value2)
     print("value3 = ", return_value3)
+    print("value4 = ", return_value4)
