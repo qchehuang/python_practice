@@ -1,12 +1,10 @@
 from numpy import *
 import time
 
-def random_initialize(demen):
+def matrix_initialize(demen):
 
     matrix_list = []
     bin_value_list = []
-
-    data1 = mat(zeros((demen, demen)))
 
     value = pow(2, demen*demen)
 
@@ -24,22 +22,62 @@ def random_initialize(demen):
 
     return matrix_list
 
+def convert_row(array, x, y):
+    temp = array.copy()
+    temp[[x,y],:] = temp[[y,x],:]
+    return temp
+
+def clean_swap_order_list(list):
+    x = 0
+    for i in list:
+        x = x + 1
+        a, b = i[0],i[1]
+        a, b = b, a
+        for j in list[x:]:
+            if j == [a, b]:
+                #print(j)
+                list.remove(j)
+    return
+
+
 if __name__ == "__main__":
 
-    demen = 2
-    my_matrix_list = random_initialize(demen)
+    #a = array([0,1,2,4,5,6,7,8,9])
+    #a = a.reshape(3,3)
 
-    my_swap_row_list = []
+    #for i in range(0,3):
+        #t = row_swap_list[i]
+
+        #print(a)
+        #b = convert_row(a, row_swap_list[i][0], row_swap_list[i][1])
+
+        #print(t[0], " ", t[1])
+        #print(b)
+        #print("==============================")
+
+
+    demen = 3
+
+    my_matrix_list = matrix_initialize(demen)
+
+    row_swap_order_list = []
+    matrix_record_list  = []
+    for i in range(0, demen):
+        for j in range(0, demen):
+            if i is not j:
+                row_swap_order_list.append([i, j])
+
+    clean_swap_order_list(row_swap_order_list)
 
     for i in my_matrix_list:
-        #print(i)
-        for j in range(0, demen):
-            i[[j,demen-1], :] = i[[demen-1,j],:]
-            my_swap_row_list.append(i)
-
-            for n in my_swap_row_list:
-                print(n)
-
-        time.sleep(10)
-    my_swap_row_list.clear()
+        for j in range(0, len(row_swap_order_list)):
+            print(row_swap_order_list)
+            print("=======")
+            print(i)
+            print("==============")
+            a = convert_row(i, row_swap_order_list[j][0], row_swap_order_list[j][1])
+            print(a)
+            print("=======")
+            print('\n\n')
+            matrix_record_list.append(a)
 
